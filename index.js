@@ -3,9 +3,6 @@ import { data } from "./data/data.js";
 const items = document.getElementById("items");
 const templateCard = document.getElementById("template-card").content;
 const fragment = document.createDocumentFragment();
-let like = [];
-let dislike = [];
-
 document.addEventListener("DOMContentLoaded", () => {
   loadData(data);
 });
@@ -29,7 +26,7 @@ items.addEventListener("click", (e) => {
 });
 
 items.addEventListener("click", (e) => {
-  addDislike(e);
+  disLike(e);
 });
 
 const addLike = (e) => {
@@ -54,10 +51,13 @@ const setLike = (objeto) => {
     boton.cantidad = like[boton.id].cantidad + 1;
     objeto.querySelector("#like").textContent = boton.cantidad;
   }
+};
 
-  like[boton.id] = { ...boton };
-
-  console.log(like[boton.id]);
+const setLike = (object) => {
+  const label = object.querySelector("#like");
+  let cantidad = Number(label.textContent) || 0;
+  cantidad++;
+  label.textContent = cantidad;
 };
 
 /*Danger*/
