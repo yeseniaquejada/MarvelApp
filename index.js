@@ -15,8 +15,8 @@ const loadData = (data) => {
     const { id, name, image } = personaje;
     templateCard.querySelector("h5").textContent = name;
     templateCard.querySelector("img").setAttribute("src", image);
-    templateCard.querySelector(".btn-dark").dataset.id = id;
-    templateCard.querySelector(".btn-danger").dataset.id = id;
+    templateCard.querySelector(".btn-dark").dataset.id = id;;
+    templateCard.querySelector(".btn-danger").dataset.id = id;;
     const clone = templateCard.cloneNode(true);
     fragment.appendChild(clone);
   });
@@ -28,9 +28,19 @@ items.addEventListener("click", (e) => {
   addLike(e);
 });
 
+items.addEventListener("click", (e) => {
+  addDislike(e);
+});
+
 const addLike = (e) => {
   if (e.target.classList.contains("btn-dark")) {
     setLike(e.target.parentElement);
+  }
+};
+
+const addDislike = (e) => {
+  if (e.target.classList.contains("btn-danger")) {
+    setDislike(e.target.parentElement);
   }
 };
 
@@ -50,3 +60,19 @@ const setLike = (objeto) => {
   console.log(like[boton.id]);
 };
 
+/*Danger*/
+const setDislike = (objeto) => {
+  const boton = {
+    id: objeto.querySelector(".btn-danger").dataset.id,
+    cantidad: 0,
+  };
+
+  if (dislike.hasOwnProperty(boton.id)) {
+    boton.cantidad = dislike[boton.id].cantidad + 1;
+    objeto.querySelector("#dislike").textContent = boton.cantidad;
+  }
+
+  dislike[boton.id] = { ...boton };
+
+  console.log(dislike[boton.id]);
+};
