@@ -3,9 +3,6 @@ import { data } from "./data/data.js";
 const items = document.getElementById("items");
 const templateCard = document.getElementById("template-card").content;
 const fragment = document.createDocumentFragment();
-let like = [];
-let dislike = [];
-
 document.addEventListener("DOMContentLoaded", () => {
   loadData(data);
 });
@@ -28,25 +25,32 @@ items.addEventListener("click", (e) => {
   addLike(e);
 });
 
+items.addEventListener("click", (e) => {
+  disLike(e);
+});
+
 const addLike = (e) => {
   if (e.target.classList.contains("btn-dark")) {
     setLike(e.target.parentElement);
   }
 };
 
-const setLike = (objeto) => {
-  const boton = {
-    id: objeto.querySelector(".btn-dark").dataset.id,
-    cantidad: 0,
-  };
-
-  if (like.hasOwnProperty(boton.id)) {
-    boton.cantidad = like[boton.id].cantidad + 1;
-    objeto.querySelector("#like").textContent = boton.cantidad;
+const disLike = (e) => {
+  if (e.target.classList.contains("btn-danger")) {
+    setDisLike(e.target.parentElement);
   }
-
-  like[boton.id] = { ...boton };
-
-  console.log(like[boton.id]);
 };
 
+const setLike = (object) => {
+  const label = object.querySelector("#like");
+  let cantidad = Number(label.textContent) || 0;
+  cantidad++;
+  label.textContent = cantidad;
+};
+
+const setDisLike = (object) => {
+  const label = object.querySelector("#disLike");
+  let cantidad = Number(label.textContent) || 0;
+  cantidad++;
+  label.textContent = cantidad;
+};
