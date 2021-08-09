@@ -3,7 +3,6 @@ import { data } from "./data/data.js";
 const items = document.getElementById("items");
 const templateCard = document.getElementById("template-card").content;
 const fragment = document.createDocumentFragment();
-
 document.addEventListener("DOMContentLoaded", () => {
   loadData(data);
 });
